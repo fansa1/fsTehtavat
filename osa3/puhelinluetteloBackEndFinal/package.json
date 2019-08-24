@@ -1,0 +1,42 @@
+{
+  "name": "puhelinluettelobackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:ui": "rmdir C:\\Users\\Samuel\\fsTehtavat\\osa3\\puhelinluetteloBackEnd\\build /q /s && cd..\\..\\osa2\\puhelinluettelo && npm run build --prod && move C:\\Users\\Samuel\\fsTehtavat\\osa2\\puhelinluettelo\\build C:\\Users\\Samuel\\fsTehtavat\\osa3\\puhelinluetteloBackEnd",
+    "deploy": "git push heroku master",
+    "deploy:full": "git add . && git commit -m uibuild && npm run deploy",
+    "logs:prod": "heroku logs --tail",
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "lint": "C:\\Users\\Samuel\\fsTehtavat\\osa3\\puhelinluetteloBackEnd\\node_modules\\.bin\\eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "C:/Users/Samuel/fsTehtavat/osa3/puhelinluetteloBackEnd/.git/"
+  },
+  "author": "SF",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.9",
+    "mongoose-unique-validator": "^2.0.3",
+    "morgan": "^1.9.1",
+    "node": "^12.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.2.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-standard": "^14.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "^1.19.1"
+  }
+}
