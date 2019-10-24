@@ -1,0 +1,222 @@
+const listHelper = require('../utils/list_helper')
+const blogiLista = require('../blogilista.js')
+
+test('dummy returns one', () => {
+  const emptyList = []
+
+  const result = listHelper.dummy(emptyList)
+  expect(result).toBe(1)
+})
+
+describe('totalLikes', () => {
+  test('of one value is the value itself', () => {
+  const listWithOneBlog = [
+    {
+      _id: '5a422aa71b54a676234d17f8',
+      title: 'Go To Statement Considered Harmful',
+      author: 'Edsger W. Dijkstra',
+      url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+      likes: 5,
+      __v: 0
+    }
+  ]
+
+  const result = listHelper.totalLikes(listWithOneBlog)
+  expect(result).toBe(5)
+})
+
+test('of empty arry is 0', () => {
+   const emptyList = []
+   const result = listHelper.totalLikes(emptyList)
+  expect(result).toBe(0)
+})
+
+test('of many is calculated right', () => {
+  const lista = [
+    {
+      _id: "5a422a851b54a676234d17f7",
+      title: "React patterns",
+      author: "Michael Chan",
+      url: "https://reactpatterns.com/",
+      likes: 7,
+      __v: 0
+    },
+    {
+      _id: "5a422aa71b54a676234d17f8",
+      title: "Go To Statement Considered Harmful",
+      author: "Edsger W. Dijkstra",
+      url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
+      likes: 5,
+      __v: 0
+    },
+    {
+      _id: "5a422b3a1b54a676234d17f9",
+      title: "Canonical string reduction",
+      author: "Edsger W. Dijkstra",
+      url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+      likes: 12,
+      __v: 0
+    },
+    {
+      _id: "5a422b891b54a676234d17fa",
+      title: "First class tests",
+      author: "Robert C. Martin",
+      url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
+      likes: 10,
+      __v: 0
+    },
+    {
+      _id: "5a422ba71b54a676234d17fb",
+      title: "TDD harms architecture",
+      author: "Robert C. Martin",
+      url: "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
+      likes: 0,
+      __v: 0
+    },
+    {
+      _id: "5a422bc61b54a676234d17fc",
+      title: "Type wars",
+      author: "Robert C. Martin",
+      url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
+      likes: 2,
+      __v: 0
+    }  
+  ]
+  const result = listHelper.totalLikes(lista)
+ expect(result).toBe(36)
+ 
+  })
+})
+
+describe('favoriteBlog', () => {
+  test('one blog with no likes', () => {
+    const listWithOneBlog = [
+      {
+        _id: '5a422aa71b54a676234d17f8',
+        title: 'Go To Statement Considered Harmful',
+        author: 'Edsger W. Dijkstra',
+        url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+        likes: 0,
+        __v: 0
+      }
+    ]
+
+    const esimerkki = {
+      title: 'Go To Statement Considered Harmful',
+      author: 'Edsger W. Dijkstra',
+      likes: 0
+    }
+  
+    const result = listHelper.favoriteBlog(listWithOneBlog)
+    expect(result).toEqual(esimerkki)
+  })
+
+  test('of many is calculated right', () => {
+    const result = listHelper.favoriteBlog(blogiLista.blogs)
+    const esimerkki = {
+      title: "Canonical string reduction",
+      author: "Edsger W. Dijkstra",
+      likes: 12
+    }
+   expect(result).toEqual(esimerkki)
+  
+   
+    })
+
+    test('empty array', () => {
+      const emptyList = []
+    
+      const result = listHelper.favoriteBlog(emptyList)
+      expect(result).toEqual(undefined)
+    })
+
+
+
+
+})
+
+describe('mostBlogs', () => {
+  test('of many is calculated right', () => {
+    const result = listHelper.mostBlogs(blogiLista.blogs)
+    const esimerkki = 
+      {
+        author: "Robert C. Martin",
+        blogs: 3
+      }
+    
+   expect(result).toEqual(esimerkki)
+  
+   
+    })
+    test('empty array', () => {
+      const emptyList = []
+    
+      const result = listHelper.mostBlogs(emptyList)
+      expect(result).toEqual(undefined)
+    })
+
+    test('one blog with no likes', () => {
+      const listWithOneBlog = [
+        {
+          _id: '5a422aa71b54a676234d17f8',
+          title: 'Go To Statement Considered Harmful',
+          author: 'Edsger W. Dijkstra',
+          url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+          likes: 0,
+          __v: 0
+        }
+      ]
+  
+      const esimerkki = {
+        author: 'Edsger W. Dijkstra',
+        blogs: 1
+      }
+    
+      const result = listHelper.mostBlogs(listWithOneBlog)
+      expect(result).toEqual(esimerkki)
+    })
+  })
+
+  describe('mostLikes', () => {
+    test('of many is calculated right', () => {
+      const result = listHelper.mostLikes(blogiLista.blogs)
+      const esimerkki = 
+      {
+        author: "Edsger W. Dijkstra",
+        likes: 17
+      }
+      
+     expect(result).toEqual(esimerkki)
+    
+     
+      })
+      test('empty array', () => {
+        const emptyList = []
+      
+        const result = listHelper.mostLikes(emptyList)
+        expect(result).toEqual(undefined)
+      })
+  
+      test('one blog with no likes', () => {
+        const listWithOneBlog = [
+          {
+            _id: '5a422aa71b54a676234d17f8',
+            title: 'Go To Statement Considered Harmful',
+            author: 'Edsger W. Dijkstra',
+            url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+            likes: 0,
+            __v: 0
+          }
+        ]
+    
+        const esimerkki = {
+          author: 'Edsger W. Dijkstra',
+          likes: 0
+        }
+      
+        const result = listHelper.mostLikes(listWithOneBlog)
+        expect(result).toEqual(esimerkki)
+      })
+    })
+
+  
